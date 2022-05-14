@@ -14,7 +14,6 @@
 //   // };
 //   return Students;
 // };
-const {Sequelize, DataTypes} = require("sequelize");
 
 module.exports = (sequelize, DataType) => {
   const students = sequelize.define('Students', {
@@ -58,13 +57,6 @@ module.exports = (sequelize, DataType) => {
         record.dataValues.updatedAt = Math.floor(Date.now());
       },
       beforeUpdate: (record, options) => {
-        record.dataValues.updatedAt = Math.floor(Date.now());
-      },
-      beforeBulkUpdate: (record, options) => {
-        record.attributes.updatedAt = Math.floor(Date.now());
-      },
-      beforeBulkCreate: (record, options) => {
-        record.attributes.createdAt = Math.floor(Date.now());
         record.dataValues.updatedAt = Math.floor(Date.now());
       }
     }
