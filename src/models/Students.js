@@ -20,8 +20,7 @@ module.exports = (sequelize, DataType) => {
       },
       mobileNumber:{
         type:DataType.INTEGER,
-          allowNull: true,
-          trueallowNull: false,
+          allowNull: false,
           unique: true
       },
       passWord:{
