@@ -1,10 +1,12 @@
 
 const express = require('express');
-const studentRoutes = require('./src/routes/student')
+const studentRoutes = require('./src/routes/students')
+const parentRoutes = require('./src/routes/parents')
 const app = express();
 app.use(express.json());
 
-app.use("/student",studentRoutes)
+app.use("/studentData",studentRoutes)
+app.use("/parentData",parentRoutes)
 
 // app.get('/hello',(req,res)=>{
 //   return res.send("hello sandhya")

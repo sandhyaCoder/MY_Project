@@ -1,43 +1,43 @@
 
 module.exports = (sequelize, DataType) => {
-  const students = sequelize.define('Students', {
+  const parents = sequelize.define('Parents', {
 
     id: {
       type: DataType.BIGINT, primaryKey: true, autoIncrement: true
     },
 
-      studentName: {
+      name: {
            type:DataType.STRING,
           allowNull: true
       },
       class: {
-        type:DataType.INTEGER,
+        type:DataType.STRING,
           allowNull:true
       },
       rollNumber:{
-        type:DataType.INTEGER,
+        type:DataType.BIGINT,
           allowNull: true
       },
       mobileNumber:{
-        type:DataType.INTEGER,
+        type:DataType.BIGINT,
           allowNull: false,
           unique: true
       },
       passWord:{
-        type:DataType.INTEGER,
+        type:DataType.STRING,
           allowNull: true
       },
-     otp:{
+      otp:{
         type:DataType.INTEGER,
           allowNull: true
       },
       createdAt: {
         allowNull: false,
-        type:DataType.INTEGER,
+        type:DataType.BIGINT,
       },
       updatedAt: {
         allowNull: false,
-        type:DataType.INTEGER,
+        type:DataType.BIGINT,
       }
   }, {
     hooks: {
@@ -50,9 +50,9 @@ module.exports = (sequelize, DataType) => {
       }
     }
   })
-  students.associate = function(models){
+  parents.associate = function(models){
 
   };
-  return students;
+  return parents;
   
 }
