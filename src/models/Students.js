@@ -27,6 +27,10 @@ module.exports = (sequelize, DataType) => {
         type:DataType.INTEGER,
           allowNull: true
       },
+     otp:{
+        type:DataType.INTEGER,
+          allowNull: true
+      },
       createdAt: {
         allowNull: false,
         type:DataType.INTEGER,

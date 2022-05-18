@@ -20,10 +20,15 @@ module.exports = (sequelize, DataType) => {
       },
       mobileNumber:{
         type:DataType.BIGINT,
-          allowNull: true
+          allowNull: false,
+          unique: true
       },
       passWord:{
         type:DataType.STRING,
+          allowNull: true
+      },
+      otp:{
+        type:DataType.INTEGER,
           allowNull: true
       },
       createdAt: {

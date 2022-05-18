@@ -23,6 +23,9 @@ module.exports = {
       passWord: {
         type: Sequelize.STRING
       },
+      otp: {
+        type: Sequelize.NUMBER
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

@@ -1,6 +1,7 @@
 const studentdata = require('../query/student');
+const {generateAccessToken} = require('../auth/jwt')
 
-
+//  For create studets account
   async function  createStudentsData (req, res){
     try {
       const body = req.body
@@ -10,9 +11,10 @@ const studentdata = require('../query/student');
         rollNumber: body.rollNumber,
         mobileNumber: body.mobileNumber,
         passWord: body.passWord,
+        otp: body.otp,
+
       }
       const userCollection = await studentdata.createStudent(obj)
-      // console.log(userCollection, "xxxxxxxxxxxxx");
       res.status(201).send(userCollection)
     } catch (e) {
       console.log(e)
@@ -20,6 +22,7 @@ const studentdata = require('../query/student');
     }
   }
 
+  // For get all students data 
   async function  getAllStudentsData (req, res){
     try {
       const studentCollection = await studentdata.getAllStudents()
@@ -30,18 +33,39 @@ const studentdata = require('../query/student');
     }
   }
 
+  // For login with mobile number
 async function checkUserDetails(req,res){
-  // console.log("body data",req.body);
   try{
     const checkMobileNo = await studentdata.checkMobileNumber(req.body);
-    // console.log("yyyyyyyyyyyyyyyyyy",checkMobileNo);
-    res.status(200).send(checkMobileNo)
-
-
+    if(checkMobileNo.status){
+      const token = generateAccessToken(req.body)
+      res.cookie("key", token);
+      res.send({"token": "hello" + token})
+    }else{
+      res.send({"sorry": "Mobile number doesn't exist"});
+    }
+  
   }catch(e){
-    res.status(400).send(e)
+    res.status(500).send(e)
 
   }
 }
 
-module.exports = {createStudentsData, getAllStudentsData, checkUserDetails}
+// Otp verifiy 
+async function checkOtp(req,res){
+  try{
+    const checkotp = await studentdata.checkOtp(req.body);
+    if(checkotp.status){
+      res.send({"token": "otp verify successfuly"})
+    }else{
+      res.send({"otp": "otp not found!, please create otp"});
+    }
+  }catch(e){
+    res.status(500).send(e)
+
+  }
+}
+
+
+
+module.exports = {createStudentsData, getAllStudentsData, checkUserDetails, checkOtp}
